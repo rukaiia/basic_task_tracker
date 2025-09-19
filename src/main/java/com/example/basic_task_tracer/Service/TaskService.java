@@ -21,6 +21,7 @@ import java.time.LocalDate;
 public class TaskService {
 private final TaskRepository taskRepository;
 private final UserRepository userRepository;
+private final EmailService emailService;
 
 
 
@@ -35,10 +36,17 @@ private final UserRepository userRepository;
                 .completed(taskDto.getCompleted())
                 .owner(userTask).
                 maskedNumber(taskDto.getMaskedNumber())
-
                 .build();
 
-        return taskRepository.saveAndFlush(task);
+        Task savedTask =  taskRepository.saveAndFlush(task);
+        emailService.sendMailafterCreatedTask(
+                userTask.getEmail(),
+                savedTask.getTitle(),
+                savedTask.getDescription(),
+                savedTask.isCompleted()
+        );
+        return savedTask;
+
     }
 
 

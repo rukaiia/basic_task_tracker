@@ -17,6 +17,7 @@ public class UserDto {
     String username;
     String password;
     boolean enabled = true;
+    String email;
 
 
 }

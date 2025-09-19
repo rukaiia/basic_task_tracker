@@ -31,6 +31,7 @@ public class AuthenticationService {
         User users = User.builder()
                 .username(user.getUsername())
                 .password(passwordEncoder.encode(user.getPassword()))
+                .email(user.getEmail())
                 .build();
 
         userRepository.saveAndFlush(users);

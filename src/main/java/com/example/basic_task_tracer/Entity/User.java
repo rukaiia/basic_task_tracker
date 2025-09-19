@@ -30,12 +30,18 @@ public class User {
 
 
 
+
+
+
     @Column(nullable = false)
     private boolean enabled = true;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Task> tasks = new ArrayList<>();
+
+    @Column(nullable = false)
+    private String email;
 
 
 }
